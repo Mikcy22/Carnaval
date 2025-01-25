@@ -1,0 +1,31 @@
+src/main/java/com/example/carnaval/
+    - controller/
+        - AgrupacionController.java
+        - ComponenteController.java
+        - PuntuacionController.java
+    - model/
+        - Agrupacion.java
+        - Componente.java
+        - Puntuacion.java
+    - repository/
+        - AgrupacionRepository.java
+        - ComponenteRepository.java
+        - PuntuacionRepository.java
+    - service/
+        - AgrupacionService.java
+        - ComponenteService.java
+        - PuntuacionService.java
+    - CarnavalCadizApplication.java
+src/main/resources/
+    - templates/
+        - agrupaciones/
+            - list.html
+            - form.html
+            - detalles.html
+        - componentes/
+            - form.html
+        - puntuaciones/
+            - form.html
+        - clasificacion.html
+    - application.properties
+    - data.sql
