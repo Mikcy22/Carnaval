@@ -1,6 +1,7 @@
 package com.example.carnaval.controller;
 
 
+import com.example.carnaval.model.Agrupacion;
 import com.example.carnaval.model.Componente;
 import com.example.carnaval.service.AgrupacionService;
 import com.example.carnaval.service.ComponenteService;
@@ -14,55 +15,50 @@ import java.util.List;
 @Controller
 @RequestMapping("/componentes")
 public class ComponenteController {
+
     @Autowired
     private ComponenteService componenteService;
+
+    @Autowired
     private AgrupacionService agrupacionService;
 
-    // Mostrar formulario para crear un componente
-    @GetMapping("/new")
-    public String showComponenteForm(Model model) {
-        model.addAttribute("componente", new Componente());
-        model.addAttribute("agrupaciones", agrupacionService.getAllAgrupaciones());
+    // Mostrar formulario para añadir un componente
+    @GetMapping("/new/{agrupacionId}")
+    public String showComponenteForm(@PathVariable Long agrupacionId, Model model) {
+        Agrupacion agrupacion = agrupacionService.getAgrupacionById(agrupacionId);
+        if (agrupacion == null) {
+            return "redirect:/agrupaciones"; // Redirige si la agrupación no existe
+        }
+        Componente componente = new Componente();
+        componente.setAgrupacion(agrupacion); // Asociar el componente a la agrupación
+        model.addAttribute("componente", componente);
+        model.addAttribute("agrupacion", agrupacion);
         return "componentes/form";
     }
 
-    // Guardar un componente (crear o actualizar)
+    // Guardar un componente
     @PostMapping("/save")
     public String saveComponente(@ModelAttribute("componente") Componente componente) {
-        componenteService.saveComponente(componente);
-        return "redirect:/componentes";
-    }
+        // Asociar el componente a la agrupación
+        Agrupacion agrupacion = agrupacionService.getAgrupacionById(componente.getAgrupacion().getId());
+        componente.setAgrupacion(agrupacion);
 
-    // Mostrar formulario para editar un componente
-    @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model) {
-        Componente componente = componenteService.getComponenteById(id);
-        model.addAttribute("componente", componente);
-        model.addAttribute("agrupaciones", agrupacionService.getAllAgrupaciones());
-        return "componentes/form";
+        // Guardar el componente
+        componenteService.saveComponente(componente);
+
+        // Redirigir a la vista de detalles de la agrupación
+        return "redirect:/agrupaciones/detalles/" + agrupacion.getId();
     }
 
     // Eliminar un componente
     @GetMapping("/delete/{id}")
     public String deleteComponente(@PathVariable Long id) {
-        componenteService.deleteComponente(id);
-        return "redirect:/componentes";
+        Componente componente = componenteService.getComponenteById(id);
+        if (componente != null) {
+            Long agrupacionId = componente.getAgrupacion().getId();
+            componenteService.deleteComponente(id);
+            return "redirect:/agrupaciones/detalles/" + agrupacionId;
+        }
+        return "redirect:/agrupaciones";
     }
-
-    // Listar todos los componentes
-    @GetMapping
-    public String listComponentes(Model model) {
-        model.addAttribute("componentes", componenteService.getAllComponentes());
-        return "componentes/list";
-    }
-
-
-    @GetMapping("/agrupaciones/form")
-    public String mostrarFormulario(Model model) {
-        List<Componente> directores = componenteService.obtenerDirectores();
-        model.addAttribute("componentes", directores);  // Pasar los directores al modelo
-        return "agrupaciones/form";
-    }
-
-
 }

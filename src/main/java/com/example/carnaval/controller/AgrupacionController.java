@@ -82,16 +82,17 @@ public class AgrupacionController {
         return "redirect:/agrupaciones";
     }
 
-    /* hasta aqui funciona todo */
+    //* hasta aqui funciona todo */
 
     @GetMapping("/detalles/{id}")
     public String verDetalles(@PathVariable Long id, Model model) {
+        // Obtener la agrupación por su ID
         Agrupacion agrupacion = agrupacionService.getAgrupacionById(id);
         if (agrupacion == null) {
             return "redirect:/agrupaciones"; // Redirige si la agrupación no existe
         }
+        // Pasar la agrupación a la vista
         model.addAttribute("agrupacion", agrupacion);
-        model.addAttribute("componente", new Componente()); // Objeto vacío para el formulario
         return "agrupaciones/detalles"; // Devuelve la vista de detalles
     }
 

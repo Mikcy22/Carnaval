@@ -33,6 +33,7 @@
           <th>Rol</th>
           <th>Edad</th>
           <th>Instrumento</th>
+          <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
@@ -41,43 +42,16 @@
           <td th:text="${componente.rol}">Rol</td>
           <td th:text="${componente.edad}">Edad</td>
           <td th:text="${componente.instrumento}">Instrumento</td>
+          <td>
+            <a th:href="@{/componentes/edit/{id}(id=${componente.id})}" class="btn btn-warning btn-sm">Editar</a>
+            <a th:href="@{/componentes/delete/{id}(id=${componente.id})}" class="btn btn-danger btn-sm">Eliminar</a>
+          </td>
         </tr>
         </tbody>
       </table>
 
-      <!-- Formulario para añadir un nuevo componente -->
-      <h4 class="mt-4">Añadir Nuevo Componente</h4>
-      <form th:action="@{/componentes/save}" th:object="${componente}" method="post">
-        <!-- Campo oculto para el ID de la agrupación -->
-        <input type="hidden" th:field="*{agrupacion.id}" th:value="${agrupacion.id}" />
-
-        <!-- Campo Nombre -->
-        <div class="mb-3">
-          <label for="nombre" class="form-label">Nombre:</label>
-          <input type="text" id="nombre" th:field="*{nombre}" class="form-control" required />
-        </div>
-
-        <!-- Campo Rol -->
-        <div class="mb-3">
-          <label for="rol" class="form-label">Rol:</label>
-          <input type="text" id="rol" th:field="*{rol}" class="form-control" required />
-        </div>
-
-        <!-- Campo Edad -->
-        <div class="mb-3">
-          <label for="edad" class="form-label">Edad:</label>
-          <input type="number" id="edad" th:field="*{edad}" class="form-control" required />
-        </div>
-
-        <!-- Campo Instrumento -->
-        <div class="mb-3">
-          <label for="instrumento" class="form-label">Instrumento:</label>
-          <input type="text" id="instrumento" th:field="*{instrumento}" class="form-control" required />
-        </div>
-
-        <!-- Botón para guardar el componente -->
-        <button type="submit" class="btn btn-primary">Añadir Componente</button>
-      </form>
+      <!-- Botón para añadir un nuevo componente -->
+      <a th:href="@{/componentes/new/{id}(id=${agrupacion.id})}" class="btn btn-success">Añadir Componente</a>
     </div>
   </div>
   <a th:href="@{/agrupaciones}" class="btn btn-secondary mt-3">Volver a la Lista</a>
