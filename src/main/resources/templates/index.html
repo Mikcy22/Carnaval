@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Carnaval</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/styles.css}" href="../static/styles.css">
+</head>
+<body>
+<div class="container mt-5">
+    <header class="text-center bg-primary text-white py-4 rounded">
+        <h1>Bienvenido al Carnaval</h1>
+        <p class="lead">Gestiona tus agrupaciones y componentes de manera eficiente.</p>
+    </header>
+
+    <section class="mt-4">
+        <h2 class="text-center mb-4">Acciones Rápidas</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Ver Agrupaciones</h5>
+                        <p class="card-text">Consulta la lista de agrupaciones registradas.</p>
+                        <a th:href="@{/agrupaciones}" class="btn btn-primary">Ir a Agrupaciones</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Añadir Agrupación</h5>
+                        <p class="card-text">Registra una nueva agrupación en el sistema.</p>
+                        <a th:href="@{/agrupaciones/new}" class="btn btn-success">Crear Agrupación</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Gestionar Componentes</h5>
+                        <p class="card-text">Administra los componentes de las agrupaciones.</p>
+                        <a th:href="@{/componentes}" class="btn btn-info">Ir a Componentes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="mt-5 text-center bg-dark text-white py-3 rounded">
+        <p>&copy; 2025 Carnaval App. Hecho por Micky.</p>
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
