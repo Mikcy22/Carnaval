@@ -13,6 +13,7 @@ public class PuntuacionController {
     @Autowired
     private PuntuacionService puntuacionService;
 
+
     @GetMapping("/new")
     public String showPuntuacionForm(Model model) {
         model.addAttribute("puntuacion", new Puntuacion());

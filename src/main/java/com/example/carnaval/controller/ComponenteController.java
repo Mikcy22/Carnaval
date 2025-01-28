@@ -3,6 +3,7 @@ package com.example.carnaval.controller;
 
 import com.example.carnaval.model.Agrupacion;
 import com.example.carnaval.model.Componente;
+import com.example.carnaval.model.Modalidad;
 import com.example.carnaval.service.AgrupacionService;
 import com.example.carnaval.service.ComponenteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class ComponenteController {
         model.addAttribute("agrupacion", agrupacion);
         return "componentes/form";
     }
+
 
     // Guardar un componente
     @PostMapping("/save")

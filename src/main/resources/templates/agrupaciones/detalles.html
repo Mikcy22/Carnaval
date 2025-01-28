@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Detalles de la Agrupación</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -11,18 +12,64 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title" th:text="${agrupacion.nombre}">Nombre de la Agrupación</h5>
-      <p class="card-text">
-        <strong>Director:</strong> <span th:text="${agrupacion.director.nombre}">Nombre del Director</span>
-      </p>
-      <p class="card-text">
-        <strong>Modalidad:</strong> <span th:text="${agrupacion.modalidad}">Modalidad</span>
-      </p>
-      <p class="card-text">
-        <strong>Localidad:</strong> <span th:text="${agrupacion.localidad}">Localidad</span>
-      </p>
-      <p class="card-text">
-        <strong>Número de Componentes:</strong> <span th:text="${agrupacion.numeroDeComponentes}">Número de Componentes</span>
-      </p>
+
+      <!-- CARTAS DE DATOS -->
+      <div class="container my-4">
+        <div class="row justify-content-center">
+          <!-- Card 1 -->
+          <div class="col-12 col-sm-6 col-md-3 mb-4">
+            <div class="card text-center h-100">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <i class="fas fa-user-tie"></i> Director
+                </h5>
+                <p class="card-text">
+                  <span th:text="${agrupacion.director.nombre}">Nombre del Director</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="col-12 col-sm-6 col-md-3 mb-4">
+            <div class="card text-center h-100">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <i class="fa-solid fa-microphone-lines"></i> Modalidad
+                </h5>
+                <p class="card-text">
+                  <span th:text="${agrupacion.modalidad}">Modalidad</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="col-12 col-sm-6 col-md-3 mb-4">
+            <div class="card text-center h-100">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <i class="fa-solid fa-location-dot"></i> Localidad
+                </h5>
+                <p class="card-text">
+                  <span th:text="${agrupacion.localidad}">Localidad</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- Card 4 -->
+          <div class="col-12 col-sm-6 col-md-3 mb-4">
+            <div class="card text-center h-100">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <i class="fa-solid fa-people-group"></i> Componentes
+                </h5>
+                <p class="card-text">
+                  <span th:text="${agrupacion.numeroDeComponentes}">Número de Componentes</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Tabla de Componentes -->
       <h4>Componentes:</h4>
