@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Clasificación Final</title>
+</head>
+<body>
+<h1>Clasificación Final</h1>
+<div th:each="entry : ${clasificacion}">
+  <h2 th:text="${entry.key}"></h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Agrupación</th>
+      <th>Puntos Totales</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="agrupacion : ${entry.value}">
+      <td th:text="${agrupacion.nombre}"></td>
+      <td th:text="${agrupacion.puntuaciones.?[puntos].![puntos].?sum()}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

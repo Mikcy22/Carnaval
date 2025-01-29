@@ -3,6 +3,7 @@ package com.example.carnaval.controller;
 import com.example.carnaval.model.Agrupacion;
 import com.example.carnaval.model.Componente;
 import com.example.carnaval.model.Modalidad;
+import com.example.carnaval.model.Puntuacion;
 import com.example.carnaval.service.AgrupacionService;
 import com.example.carnaval.service.ComponenteService;
 import jakarta.validation.Valid;
@@ -94,6 +95,14 @@ public class AgrupacionController {
         // Pasar la agrupación a la vista
         model.addAttribute("agrupacion", agrupacion);
         return "agrupaciones/detalles"; // Devuelve la vista de detalles
+    }
+
+
+    @GetMapping("/puntuaciones/new")
+    public String showPuntuacionForm(Model model) {
+        model.addAttribute("puntuacion", new Puntuacion());
+        model.addAttribute("agrupaciones", agrupacionService.getAllAgrupaciones()); // Pasar la lista de agrupaciones
+        return "puntuaciones/form";
     }
 
 

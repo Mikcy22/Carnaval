@@ -99,6 +99,31 @@
 
       <!-- Botón para añadir un nuevo componente -->
       <a th:href="@{/componentes/new/{id}(id=${agrupacion.id})}" class="btn btn-success">Añadir Componente</a>
+
+      <!-- Tabla de Puntuaciones -->
+      <h4 class="mt-4">Puntuaciones:</h4>
+      <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>Fase</th>
+          <th>Puntos</th>
+          <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="puntuacion : ${agrupacion.puntuaciones}">
+          <td th:text="${puntuacion.fase}">Fase</td>
+          <td th:text="${puntuacion.puntos}">Puntos</td>
+          <td>
+            <a th:href="@{/puntuaciones/edit/{id}(id=${puntuacion.id})}" class="btn btn-warning btn-sm">Editar</a>
+            <a th:href="@{/puntuaciones/delete/{id}(id=${puntuacion.id})}" class="btn btn-danger btn-sm">Eliminar</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <!-- Botón para añadir una nueva puntuación -->
+      <a th:href="@{/puntuaciones/new/{id}(id=${agrupacion.id})}" class="btn btn-success">Añadir Puntuación</a>
     </div>
   </div>
   <a th:href="@{/agrupaciones}" class="btn btn-secondary mt-3">Volver a la Lista</a>

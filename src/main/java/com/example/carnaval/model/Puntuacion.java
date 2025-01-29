@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "puntuaciones") // Nombre de la tabla en la base de datos
+@Table(name = "puntuaciones")
 public class Puntuacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +24,7 @@ public class Puntuacion {
     private Agrupacion agrupacion;
 
     // Getters y Setters
+
     public Long getId() {
         return id;
     }
@@ -57,6 +58,3 @@ public class Puntuacion {
     }
 }
 
-enum Fase {
-    Preliminares, Cuartos, Semifinales, Final
-}
