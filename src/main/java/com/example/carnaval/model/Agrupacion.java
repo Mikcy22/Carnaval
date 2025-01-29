@@ -101,5 +101,9 @@ public class Agrupacion {
     public void setPuntuaciones(List<Puntuacion> puntuaciones) {
         this.puntuaciones = puntuaciones;
     }
+
+    public int getPuntuacionTotal() {
+        return 0;
+    }
 }
 

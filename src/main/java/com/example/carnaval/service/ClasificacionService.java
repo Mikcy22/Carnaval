@@ -12,12 +12,19 @@ import java.util.stream.Collectors;
 
 @Service
 public class ClasificacionService {
+
     @Autowired
     private AgrupacionRepository agrupacionRepository;
 
     public Map<Modalidad, List<Agrupacion>> getClasificacion() {
         List<Agrupacion> agrupaciones = agrupacionRepository.findAll();
+
         return agrupaciones.stream()
-                .collect(Collectors.groupingBy(Agrupacion::getModalidad));
+                .collect(Collectors.groupingBy(Agrupacion::getModalidad,
+                        Collectors.collectingAndThen(Collectors.toList(),
+                                lista -> lista.stream()
+                                        .sorted((a, b) -> Integer.compare(b.getPuntuacionTotal(), a.getPuntuacionTotal()))
+                                        .collect(Collectors.toList()))));
     }
 }
+

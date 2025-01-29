@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Clasificación Final</title>
+  <title>Clasificación</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h1>Clasificación Final</h1>
-<div th:each="entry : ${clasificacion}">
-  <h2 th:text="${entry.key}"></h2>
-  <table>
-    <thead>
-    <tr>
-      <th>Agrupación</th>
-      <th>Puntos Totales</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="agrupacion : ${entry.value}">
-      <td th:text="${agrupacion.nombre}"></td>
-      <td th:text="${agrupacion.puntuaciones.?[puntos].![puntos].?sum()}"></td>
-    </tr>
-    </tbody>
-  </table>
+<div class="container mt-5">
+  <h1>Clasificación</h1>
+
+  <div th:each="entry : ${clasificacion}">
+    <h2 th:text="${entry.key.nombre}"></h2> <!-- Modalidad -->
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Posición</th>
+        <th>Agrupación</th>
+        <th>Puntuación Total</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="agrupacion, iterStat : ${entry.value}">
+        <td th:text="${iterStat.count}"></td>
+        <td th:text="${agrupacion.nombre}"></td>
+        <td th:text="${agrupacion.puntuacionTotal}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 </body>
 </html>
