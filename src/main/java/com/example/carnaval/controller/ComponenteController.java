@@ -38,19 +38,48 @@ public class ComponenteController {
     }
 
 
-    // Guardar un componente
+    @GetMapping("/edit/{componenteId}")
+    public String showEditComponenteForm(@PathVariable Long componenteId, Model model) {
+        Componente componente = componenteService.getComponenteById(componenteId);
+        if (componente == null) {
+            return "redirect:/componentes"; // Redirige si el componente no existe
+        }
+
+        Agrupacion agrupacion = componente.getAgrupacion();
+        model.addAttribute("componente", componente);
+        model.addAttribute("agrupacion", agrupacion);
+        return "componentes/edit"; // Mostrar el formulario de edición
+    }
+
+
+    // Guardar o actualizar un componente
     @PostMapping("/save")
     public String saveComponente(@ModelAttribute("componente") Componente componente) {
-        // Asociar el componente a la agrupación
-        Agrupacion agrupacion = agrupacionService.getAgrupacionById(componente.getAgrupacion().getId());
-        componente.setAgrupacion(agrupacion);
+        // Verificar si el componente tiene un ID, lo que indica que es una actualización
+        if (componente.getId() != null) {
+            // Si tiene ID, buscar el componente y actualizarlo
+            Componente existingComponente = componenteService.getComponenteById(componente.getId());
+            if (existingComponente != null) {
+                // Actualizar los valores del componente existente
+                existingComponente.setNombre(componente.getNombre());  // Actualizar solo los campos necesarios
+                existingComponente.setRol(componente.getRol());
+                existingComponente.setEdad(componente.getEdad());
+                existingComponente.setInstrumento(componente.getInstrumento());
 
-        // Guardar el componente
-        componenteService.saveComponente(componente);
+                // Guardar el componente actualizado
+                componenteService.saveComponente(existingComponente);
+            }
+        } else {
+            // Si no tiene ID, significa que es un componente nuevo, así que lo guardamos directamente
+            Agrupacion agrupacion = agrupacionService.getAgrupacionById(componente.getAgrupacion().getId());
+            componente.setAgrupacion(agrupacion);
+            componenteService.saveComponente(componente);
+        }
 
         // Redirigir a la vista de detalles de la agrupación
-        return "redirect:/agrupaciones/detalles/" + agrupacion.getId();
+        return "redirect:/agrupaciones/detalles/" + componente.getAgrupacion().getId();
     }
+
 
     // Eliminar un componente
     @GetMapping("/delete/{id}")

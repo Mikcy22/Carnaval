@@ -1,7 +1,7 @@
 package com.example.carnaval.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+        import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
@@ -102,8 +102,11 @@ public class Agrupacion {
         this.puntuaciones = puntuaciones;
     }
 
-    public int getPuntuacionTotal() {
-        return 0;
+    public double getPuntuacionTotal() {
+        return puntuaciones.stream()
+                .mapToDouble(Puntuacion::getPuntos)
+                .sum();
     }
+
 }
 

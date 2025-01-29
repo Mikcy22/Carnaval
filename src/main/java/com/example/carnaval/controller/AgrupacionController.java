@@ -73,6 +73,8 @@ public class AgrupacionController {
         return "redirect:/agrupaciones"; // Redirige a la lista de agrupaciones
     }
 
+
+
     // Método para guardar (creación)
     @PostMapping("/save")
     public String saveAgrupacion(@Valid @ModelAttribute("agrupacion") Agrupacion agrupacion, BindingResult result) {
