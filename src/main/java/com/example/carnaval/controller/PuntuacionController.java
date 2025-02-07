@@ -54,7 +54,7 @@ public class PuntuacionController {
         Puntuacion puntuacion = new Puntuacion();
         puntuacion.setAgrupacion(agrupacionService.getAgrupacionById(agrupacionId));
         model.addAttribute("puntuacion", puntuacion);
-        model.addAttribute("agrupaciones", agrupacionService.getAllAgrupaciones()); // Pasar la lista de agrupaciones
+        model.addAttribute("agrupaciones", agrupacionService.getAllAgrupaciones()); // Pasa la lista de agrupaciones
         return "puntuaciones/form";
     }
 
